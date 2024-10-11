@@ -5,6 +5,7 @@ import {TopBar} from "@/components/shared/top-bar"
 import {Filters} from "@/components/shared/filters"
 import {ProductsGroupList} from "@/components/shared/products-group-list"
 import {findPizzas, GetSearchParams} from "@/lib/find-pizzas"
+import {Stories} from "@/components/shared/stories"
 
 export default async function Home({searchParams}: { searchParams: GetSearchParams }) {
     const categories = await findPizzas(searchParams)
@@ -16,6 +17,8 @@ export default async function Home({searchParams}: { searchParams: GetSearchPara
             </Container>
 
             <TopBar categories={categories.filter((category) => category.products.length > 0)}/>
+
+            <Stories/>
 
             <Container className="mt-10 pb-14">
                 <div className="flex gap-[80px]">

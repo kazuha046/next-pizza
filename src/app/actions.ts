@@ -160,7 +160,6 @@ export async function registerUser(body: Prisma.UserCreateInput) {
         }
 
         const createdUser = await prisma.user.create({
-            // @ts-ignore
             data: {
                 fullName: body.fullName,
                 email: body.email,
