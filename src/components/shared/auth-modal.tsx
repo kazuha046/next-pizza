@@ -6,6 +6,7 @@ import {signIn} from "next-auth/react"
 import React from "react"
 import {LoginForm} from "./login-form"
 import {RegisterForm} from "./register-form"
+import Image from "next/image"
 
 interface Props {
     open: boolean;
@@ -25,7 +26,7 @@ export const AuthModal: React.FC<Props> = ({open, onClose}) => {
 
     return (
         <Dialog open={open} onOpenChange={handleClose}>
-            <DialogContent className="w-[450px] bg-white p-10">
+            <DialogContent className="w-[calc(100vw-2rem)] max-w-112.5 bg-white p-6 sm:p-10">
                 {type === "login" ? (
                     <LoginForm onClose={handleClose}/>
                 ) : (
@@ -45,7 +46,8 @@ export const AuthModal: React.FC<Props> = ({open, onClose}) => {
                         type="button"
                         className="gap-2 h-12 p-2 flex-1"
                     >
-                        <img className="w-6 h-6" src="https://github.githubassets.com/favicons/favicon.svg"/>
+                        <Image className="w-6 h-6" src="https://github.githubassets.com/favicons/favicon.svg"
+                              alt={"GitHub icon"} width={24} height={24}/>
                         GitHub
                     </Button>
 
@@ -60,16 +62,19 @@ export const AuthModal: React.FC<Props> = ({open, onClose}) => {
                         type="button"
                         className="gap-2 h-12 p-2 flex-1"
                     >
-                        <img
+                        <Image
                             className="w-6 h-6"
                             src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"
+                            alt={"Google icon"}
+                            width={24}
+                            height={24}
                         />
                         Google
                     </Button>
                 </div>
 
                 <Button variant="outline" onClick={onSwitchType} type="button" className="h-12">
-                    {type !== "login" ? "Войти" : "Регистрация"}
+                    {type !== "login" ? "Sign In" : "Sign Up"}
                 </Button>
             </DialogContent>
         </Dialog>

@@ -1,5 +1,5 @@
-import React from "react"
 import {cn} from "@/lib/utils"
+import Image from "next/image"
 
 interface Props {
     className?: string
@@ -7,29 +7,25 @@ interface Props {
     size: number
 }
 
-export const ProductImage: React.FC<Props> = ({className, imageUrl, size}) => {
+export const ProductImage = ({className, imageUrl, size}: Props) => {
     return (
         <div className={cn("flex items-center justify-center flex-1 relative w-full", className)}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
                 src={imageUrl}
-                alt={"Logotype"}
-                loading={"lazy"}
-                className={cn("relative left-2 top-2 transition-all z-10 duration-300", {
-                    "w-[300px] h-[300px]": size === 20,
-                    "w-[400px] h-[400px]": size === 30,
-                    "w-[500px] h-[500px]": size === 40
-                })}
+                alt={"Product"}
+                fill
+                sizes="(max-width: 640px) 300px, (max-width: 768px) 400px, 500px"
+                className="relative left-2 top-2 transition-all z-10 duration-300 object-contain"
             />
 
             <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed border-2
-                rounded-full border-gray-200 w-[450px] h-[450px]"
+                rounded-full border-gray-200 w-112.5 h-112.5"
             />
 
             <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-dotted border-2
-                rounded-full border-gray-100 w-[370px] h-[370px]"
+                rounded-full border-gray-100 w-92.5 h-92.5"
             />
         </div>
     )

@@ -1,6 +1,7 @@
 import {cn} from "@/lib/utils"
 import {CircleCheck} from "lucide-react"
 import React from "react"
+import Image from "next/image"
 
 interface Props {
     imageUrl: string
@@ -27,8 +28,7 @@ export const IngredientItem: React.FC<Props> = (
         >
             {active && <CircleCheck className="absolute top-2 right-2 text-primary"/>}
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img width={110} height={110} src={imageUrl} loading={"lazy"} alt={"ingredient"}/>
+            <Image width={110} height={110} src={imageUrl} loading={"lazy"} alt={"ingredient"}/>
 
             <span className="text-xs mb-1">{name}</span>
             <span className="font-bold">{price} ₽</span>

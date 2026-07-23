@@ -1,7 +1,7 @@
 import {cn} from "@/lib/utils"
-import React from "react"
 import {Title} from "./title"
 import {Button} from "../ui/button"
+import Image from "next/image"
 
 interface Props {
     imageUrl: string;
@@ -12,7 +12,7 @@ interface Props {
     className?: string;
 }
 
-export const ChooseProductForm: React.FC<Props> = (
+export const ChooseProductForm = (
     {
         name,
         imageUrl,
@@ -20,29 +20,28 @@ export const ChooseProductForm: React.FC<Props> = (
         onSubmit,
         className,
         loading
-    }
-) => {
+    }: Props) => {
     return (
-        <div className={cn(className, "flex flex-1")}>
+        <div className={cn(className, "flex flex-col lg:flex-row flex-1")}>
             <div className="flex items-center justify-center flex-1 relative w-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                     src={imageUrl}
                     alt={name}
-                    className="relative left-2 top-2 transition-all z-10 duration-300 w-[350px] h-[350px]"
-                    loading={"lazy"}
+                    fill
+                    sizes="(max-width: 640px) 200px, 350px"
+                    className="relative left-2 top-2 transition-all z-10 duration-300 object-contain"
                 />
             </div>
 
-            <div className="w-[490px] bg-[#f7f6f5] p-7">
+            <div className="w-full lg:w-122.5 bg-[#f7f6f5] p-7">
                 <Title text={name} size="md" className="font-extrabold mb-1"/>
 
                 <Button
                     loading={loading}
                     onClick={() => onSubmit?.()}
-                    className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
+                    className="h-13.75 px-10 text-base rounded-[18px] w-full mt-10"
                 >
-                    Добавить в корзину за {price} ₽
+                    Add to cart for {price} ₽
                 </Button>
             </div>
         </div>

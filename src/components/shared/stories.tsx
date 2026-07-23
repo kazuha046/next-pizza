@@ -7,6 +7,7 @@ import {Container} from "./container"
 import {cn} from "@/lib/utils"
 import {X} from "lucide-react"
 import ReactStories from "react-insta-stories"
+import Image from "next/image"
 
 interface Props {
     className?: string
@@ -36,15 +37,14 @@ export const Stories: React.FC<Props> = ({className}) => {
 
     return (
         <>
-            <Container className={cn("flex items-center justify-between gap-2 my-10", className)}>
+            <Container className={cn("flex items-center gap-2 my-10 overflow-x-auto no-scrollbar pb-2", className)}>
                 {stories.length === 0 &&
                     [...Array(6)].map((_, index) => (
-                        <div key={index} className="w-[200px] h-[250px] bg-gray-200 rounded-md animate-pulse"/>
+                        <div key={index} className="w-50 h-62.5 bg-gray-200 rounded-md animate-pulse"/>
                     ))}
 
                 {stories.map((story) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                         key={story.id}
                         onClick={() => onClickStory(story)}
                         className="rounded-md cursor-pointer"
@@ -52,14 +52,14 @@ export const Stories: React.FC<Props> = ({className}) => {
                         width={200}
                         loading={"lazy"}
                         src={story.previewImageUrl}
-                        alt={"logo"}
+                        alt={"Story preview"}
                     />
                 ))}
 
                 {open && (
                     <div
                         className="absolute left-0 top-0 w-full h-full bg-black/80 flex items-center justify-center z-30">
-                        <div className="relative" style={{width: 520}}>
+                        <div className="relative" style={{width: "min(520px, 90vw)"}}>
                             <button className="absolute -right-10 -top-5 z-30" onClick={() => setOpen(false)}>
                                 <X className="absolute top-0 right-0 w-8 h-8 text-white/50"/>
                             </button>

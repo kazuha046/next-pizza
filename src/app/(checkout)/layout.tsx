@@ -4,7 +4,7 @@ import {ReactNode, Suspense} from "react"
 import {Header} from "@/components/shared/header"
 
 export const metadata: Metadata = {
-    title: "Next Pizza | Корзина"
+    title: "Checkout"
 }
 
 export default function CheckoutLayout({children}: { children: ReactNode }) {

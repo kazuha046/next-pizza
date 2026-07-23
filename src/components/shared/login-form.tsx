@@ -1,4 +1,3 @@
-import React from "react"
 import {FormProvider, useForm} from "react-hook-form"
 import {formLoginSchema, TFormLoginValues} from "@/constants/schemas"
 import {zodResolver} from "@hookform/resolvers/zod"
@@ -7,12 +6,13 @@ import {FormInput} from "./form-input"
 import {Button} from "../ui/button"
 import toast from "react-hot-toast"
 import {signIn} from "next-auth/react"
+import Image from "next/image"
 
 interface Props {
     onClose?: VoidFunction
 }
 
-export const LoginForm: React.FC<Props> = ({onClose}) => {
+export const LoginForm = ({onClose}: Props) => {
     const form = useForm<TFormLoginValues>({
         resolver: zodResolver(formLoginSchema),
         defaultValues: {
@@ -29,17 +29,26 @@ export const LoginForm: React.FC<Props> = ({onClose}) => {
             })
 
             if (!resp?.ok) {
-                throw Error()
+                const check = await fetch(`/api/auth/login-check?email=${encodeURIComponent(data.email)}`)
+                const {exists, verified} = await check.json()
+
+                if (exists && !verified) {
+                    throw new Error("Please verify your email first")
+                }
+
+                throw new Error("Incorrect email or password")
             }
 
-            toast.success("Вы успешно вошли в аккаунт", {
+            toast.success("Successfully signed in", {
                 icon: "✅"
             })
 
             onClose?.()
         } catch (error) {
+            const message = error instanceof Error ? error.message : "Failed to sign in"
+
             console.error("Error [LOGIN]", error)
-            toast.error("Не удалось войти в аккаунт", {
+            toast.error(message, {
                 icon: "❌"
             })
         }
@@ -50,19 +59,18 @@ export const LoginForm: React.FC<Props> = ({onClose}) => {
             <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="flex justify-between items-center">
                     <div className="mr-2">
-                        <Title text="Вход в аккаунт" size="md" className="font-bold"/>
-                        <p className="text-gray-400">Введите свою почту, чтобы войти в свой аккаунт</p>
+                        <Title text="Sign In" size="md" className="font-bold"/>
+                        <p className="text-gray-400">Enter your email to sign in to your account</p>
                     </div>
 
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/assets/images/phone-icon.png" alt="phone-icon" width={60} height={60}/>
+                    <Image src="/assets/images/phone-icon.png" alt="phone-icon" width={60} height={60}/>
                 </div>
 
                 <FormInput name="email" label="E-Mail" required/>
-                <FormInput name="password" label="Пароль" type="password" required/>
+                <FormInput name="password" label="Password" type="password" required/>
 
                 <Button loading={form.formState.isSubmitting} className="h-12 text-base" type="submit">
-                    Войти
+                    Sign In
                 </Button>
             </form>
         </FormProvider>

@@ -3,7 +3,7 @@ import {ReactNode, Suspense} from "react"
 import {Header} from "@/components/shared/header"
 
 export const metadata: Metadata = {
-    title: "Next Pizza | Главная"
+    title: "Home"
 }
 
 export default function RootLayout({modal, children}: Readonly<{ modal: ReactNode, children: ReactNode }>) {

@@ -4,6 +4,7 @@ import {ArrowLeft} from "lucide-react"
 import {Title} from "./title"
 import Link from "next/link"
 import {cn} from "@/lib/utils"
+import Image from "next/image"
 
 interface Props {
     title: string
@@ -14,9 +15,11 @@ interface Props {
 
 export const InfoBlock: React.FC<Props> = ({className, title, text, imageUrl}) => {
     return (
-        <div className={cn(className, "flex items-center justify-between w-[840px] gap-12")}>
+        <div
+            className={cn(className, "flex flex-col md:flex-row items-center justify-between w-full max-w-210 gap-6 md:gap-12")}
+        >
             <div className="flex flex-col">
-                <div className="w-[445px]">
+                <div className="w-111.25">
                     <Title size="lg" text={title} className="font-extrabold"/>
                     <p className="text-gray-400 text-lg">{text}</p>
                 </div>
@@ -25,18 +28,18 @@ export const InfoBlock: React.FC<Props> = ({className, title, text, imageUrl}) =
                     <Link href="/">
                         <Button variant="outline" className="gap-2">
                             <ArrowLeft/>
-                            На главную
+                            Go Home
                         </Button>
                     </Link>
                     <a href="">
                         <Button variant="outline" className="text-gray-500 border-gray-400 hover:bg-gray-50">
-                            Обновить
+                            Refresh
                         </Button>
                     </a>
                 </div>
             </div>
 
-            <img src={imageUrl} alt={title} width={300}/>
+            {imageUrl && <Image src={imageUrl} alt={title} width={300} height={300}/>}
         </div>
     )
 }

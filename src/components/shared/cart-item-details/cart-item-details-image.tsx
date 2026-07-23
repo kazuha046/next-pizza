@@ -1,14 +1,13 @@
 import {cn} from "@/lib/utils"
-import React from "react"
+import Image from "next/image"
 
 interface Props {
     src: string
     className?: string
 }
 
-export const CartItemDetailsImage: React.FC<Props> = ({src, className}) => {
+export const CartItemDetailsImage = ({src, className}: Props) => {
     return (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img className={cn("w-[60px] h-[60px]", className)} src={src} alt={"image"}/>
+        <Image className={cn("w-[60px] h-[60px]", className)} src={src} alt={"image"} width={60} height={60}/>
     )
 }
