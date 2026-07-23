@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
         const token = req.cookies.get("cartToken")?.value
 
         if (!token) {
-            return NextResponse.json({totalAmount: 0, items: []})
+            return NextResponse.json({totalAmount: 0, cartItems: []})
         }
 
         const userCart = await prisma.cart.findFirst({
@@ -38,10 +38,10 @@ export async function GET(req: NextRequest) {
             }
         })
 
-        return NextResponse.json(userCart)
+        return NextResponse.json(userCart ?? {totalAmount: 0, cartItems: []})
     } catch (error) {
         console.log("[CART_GET] Server error", error)
-        return NextResponse.json({message: "Не удалось получить корзину"}, {status: 500})
+        return NextResponse.json({message: "Failed to fetch cart"}, {status: 500})
     }
 }
 
@@ -54,7 +54,6 @@ export async function POST(req: NextRequest) {
         }
 
         const userCart = await findOrCreateCart(token)
-
         const data = (await req.json()) as CreateCartItemValues
 
         const findCartItem = await prisma.cartItem.findFirst({
@@ -90,13 +89,13 @@ export async function POST(req: NextRequest) {
         }
 
         const updatedUserCart = await updateCartTotalAmount(token)
-
         const resp = NextResponse.json(updatedUserCart)
+
         resp.cookies.set("cartToken", token)
 
         return resp
     } catch (error) {
         console.log("[CART_POST] Server error", error)
-        return NextResponse.json({message: "Не удалось создать корзину"}, {status: 500})
+        return NextResponse.json({message: "Failed to create cart"}, {status: 500})
     }
 }

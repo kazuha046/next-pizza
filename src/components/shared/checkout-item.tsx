@@ -28,7 +28,7 @@ export const CheckoutItem: React.FC<Props> = (
     return (
         <div
             className={cn(
-                "flex items-center justify-between",
+                "flex flex-wrap items-center justify-between gap-2",
                 {
                     "opacity-50 pointer-events-none": disabled
                 },
@@ -42,7 +42,7 @@ export const CheckoutItem: React.FC<Props> = (
 
             <CartItemDetails.Price value={price}/>
 
-            <div className="flex items-center gap-5 ml-20">
+            <div className="flex items-center gap-5 ml-2 sm:ml-20">
                 <CartItemDetails.CountButton onClick={onClickCountButton} value={quantity}/>
 
                 <button type="button" onClick={onClickRemove}>

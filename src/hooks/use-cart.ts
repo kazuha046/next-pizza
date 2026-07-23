@@ -1,7 +1,7 @@
 import {useEffect} from "react"
-import {useCartStore} from "../store/cart"
+import {useCartStore} from "@/store/cart"
 import {CreateCartItemValues} from "@/components/services/dto/cart.dto"
-import {CartStateItem} from "../lib/get-cart-details"
+import {CartStateItem} from "@/lib/get-cart-details"
 
 type ReturnProps = {
     totalAmount: number
@@ -13,11 +13,18 @@ type ReturnProps = {
 }
 
 export const useCart = (): ReturnProps => {
-    const cartState = useCartStore((state) => state)
+    const totalAmount = useCartStore((state) => state.totalAmount)
+    const items = useCartStore((state) => state.items)
+    const loading = useCartStore((state) => state.loading)
+
+    const updateItemQuantity = useCartStore((state) => state.updateItemQuantity)
+    const removeCartItem = useCartStore((state) => state.removeCartItem)
+    const addCartItem = useCartStore((state) => state.addCartItem)
+    const fetchCartItems = useCartStore((state) => state.fetchCartItems)
 
     useEffect(() => {
-        cartState.fetchCartItems().then(() => console.log("Fetch cart items"))
-    }, []) // WARNING: DONT ADD cartState!!!
+        fetchCartItems().then(() => console.log("Fetch cart items"))
+    }, [])
 
-    return cartState
+    return {totalAmount, items, loading, updateItemQuantity, removeCartItem, addCartItem}
 }

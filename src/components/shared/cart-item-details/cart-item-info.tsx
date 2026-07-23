@@ -1,5 +1,4 @@
 import {cn} from "@/lib/utils"
-import React from "react"
 
 interface Props {
     name: string;
@@ -7,7 +6,7 @@ interface Props {
     className?: string;
 }
 
-export const CartItemInfo: React.FC<Props> = ({name, details, className}) => {
+export const CartItemInfo = ({name, details, className}: Props) => {
     return (
         <div>
             <div className={cn("flex items-center justify-between", className)}>

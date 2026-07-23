@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="DB-241.17890.24">
-    <data-source name="verceldb@ep-proud-night-a20afa55.eu-central-1.aws.neon.tech" uuid="6cf25655-35da-4fd6-8aff-6781852ba43e">
-      <database-info product="PostgreSQL" version="16.4" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="16.4" exact-driver-version="42.6">
+  <component name="dataSourceStorageLocal" created-in="WS-261.25134.101">
+    <data-source name="neondb@ep-soft-term-asfler1p-pooler.c-4.eu-central-1.aws.neon.tech" uuid="b9996189-049c-4ece-8ae9-e56f14ee2e7b">
+      <database-info product="PostgreSQL" version="17.10 (2947584)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="17.10" exact-driver-version="42.7">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>default</user-name>
+      <user-name>neondb_owner</user-name>
       <schema-mapping>
         <introspection-scope>
           <node kind="database" qname="@">

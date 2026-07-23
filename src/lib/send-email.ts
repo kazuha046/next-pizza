@@ -1,7 +1,7 @@
 import {Resend} from "resend"
 import {ReactNode} from "react"
 
-export const sendEmail = async (to: string, subject: string, template: ReactNode) => {
+export const sendEmail = async (to: string, subject: string, template: ReactNode | Promise<ReactNode>) => {
     const resend = new Resend(process.env.RESEND_API_KEY)
 
     const {data, error} = await resend.emails.send({
@@ -9,7 +9,7 @@ export const sendEmail = async (to: string, subject: string, template: ReactNode
         to,
         subject,
         text: "",
-        react: template
+        react: await template
     })
 
     if (error) {

@@ -54,17 +54,20 @@ export default function CheckoutPage() {
 
             const url = await createOrder(data)
 
-            toast.error("Заказ успешно оформлен! 📝 Переход на оплату... ", {
-                icon: "✅"
-            })
-
             if (url) {
+                toast.success("Order placed successfully! 📝 Redirecting to payment... ", {
+                    icon: "✅"
+                })
+
                 location.href = url
+            } else {
+                throw new Error("Failed to get payment link")
             }
         } catch (err) {
             console.log(err)
+
             setSubmitting(false)
-            toast.error("Не удалось создать заказ", {
+            toast.error("Failed to create order", {
                 icon: "❌"
             })
         }
@@ -76,12 +79,12 @@ export default function CheckoutPage() {
     }
 
     return (
-        <Container className="mt-10">
-            <Title text="Оформление заказа" className="font-extrabold mb-8 text-[36px]"/>
+        <Container className="mt-10 pb-16 sm:pb-10">
+            <Title text="Checkout" className="font-extrabold mb-8 text-[36px]"/>
 
             <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="flex gap-10">
+                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
                         <div className="flex flex-col gap-10 flex-1 mb-20">
                             <CheckoutCart
                                 onClickCountButton={onClickCountButton}
@@ -94,7 +97,7 @@ export default function CheckoutPage() {
                             <CheckoutAddressForm className={loading ? "opacity-40 pointer-events-none" : ""}/>
                         </div>
 
-                        <div className="w-[450px]">
+                        <div className="w-full lg:w-112.5">
                             <CheckoutSidebar totalAmount={totalAmount} loading={loading || submitting}/>
                         </div>
                     </div>

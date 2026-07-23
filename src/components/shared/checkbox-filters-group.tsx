@@ -27,13 +27,12 @@ export const CheckBoxFiltersGroup: React.FC<Props> = (
         items,
         defaultItems,
         limit = 5,
-        searchInputPlaceholder = "Поиск...",
+        searchInputPlaceholder = "Search...",
         className,
         loading,
         onClickCheckbox,
         selectedIds,
-        name,
-        defaultValue
+        name
 
     }
 ) => {
@@ -49,11 +48,11 @@ export const CheckBoxFiltersGroup: React.FC<Props> = (
                     ...Array(limit)
                         .fill(0)
                         .map((_, index) => (
-                            <Skeleton key={index} className={"h-6 mb-4 rounded-[8px]"}/>
+                            <Skeleton key={index} className={"h-6 mb-4 rounded-xl"}/>
                         ))
                 }
 
-                <Skeleton className={"h-6 mb-4 w-24 rounded-[8px]"}/>
+                <Skeleton className={"h-6 mb-4 w-24 rounded-xl"}/>
             </div>
         )
     }
@@ -97,7 +96,7 @@ export const CheckBoxFiltersGroup: React.FC<Props> = (
             {items.length > limit && (
                 <div className={showALl ? "border-t border-t-neutral-100 mt-4" : ""}>
                     <button onClick={() => setShowALl(!showALl)} className={"text-primary mt-3"}>
-                        {showALl ? "Скрыть" : "+ Показать все"}
+                        {showALl ? "Hide" : "+ Show all"}
                     </button>
                 </div>
             )}

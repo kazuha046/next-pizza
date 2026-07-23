@@ -25,13 +25,14 @@ export const ProductsGroupList: React.FC<Props> = (
     }
 ) => {
     const setActiveCategoryId = useCategoryStore((state) => state.setActiveId)
-    const intersectionRef = useRef(null)
-    const intersection = useIntersection(intersectionRef, {
+    const intersectionRef = useRef<HTMLDivElement>(null)
+
+    const intersection = useIntersection(intersectionRef as React.RefObject<HTMLElement>, {
         threshold: 0.4
     })
 
     useEffect(() => {
-        if(intersection?.isIntersecting) {
+        if (intersection?.isIntersecting) {
             setActiveCategoryId(categoryId)
         }
     }, [categoryId, intersection?.isIntersecting, setActiveCategoryId])
@@ -40,7 +41,7 @@ export const ProductsGroupList: React.FC<Props> = (
         <div className={className} id={title} ref={intersectionRef}>
             <Title text={title} size={"lg"} className={"font-extrabold mb-5"}/>
 
-            <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>
+            <div className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-12.5", listClassName)}>
                 {items.map((product: any, index: number) => (
                     <ProductCart
                         key={index}

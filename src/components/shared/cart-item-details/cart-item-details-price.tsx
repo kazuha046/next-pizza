@@ -1,12 +1,11 @@
 import {cn} from "@/lib/utils"
-import React from "react"
 
 interface Props {
     value: number
     className?: string
 }
 
-export const CartItemDetailsPrice: React.FC<Props> = ({value, className}) => {
+export const CartItemDetailsPrice = ({value, className}: Props) => {
     return (
         <h2 className={cn("font-bold", className)}>
             {value} ₽

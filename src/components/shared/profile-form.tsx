@@ -36,11 +36,11 @@ export const ProfileForm: React.FC<Props> = ({data}) => {
                 password: data.password
             })
 
-            toast.error("Данные обновлены 📝", {
+            toast.error("Data updated 📝", {
                 icon: "✅"
             })
         } catch (error) {
-            return toast.error("Ошибка при обновлении данных", {
+            return toast.error("Error updating data", {
                 icon: "❌"
             })
         }
@@ -54,18 +54,18 @@ export const ProfileForm: React.FC<Props> = ({data}) => {
 
     return (
         <Container className="my-10">
-            <Title text={`Личные данные | #${data.id}`} size="md" className="font-bold"/>
+            <Title text={`Personal Data | #${data.id}`} size="md" className="font-bold"/>
 
             <FormProvider {...form}>
-                <form className="flex flex-col gap-5 w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
+                <form className="flex flex-col gap-5 w-full max-w-96 mt-10" onSubmit={form.handleSubmit(onSubmit)}>
                     <FormInput name="email" label="E-Mail" required/>
-                    <FormInput name="fullName" label="Полное имя" required/>
+                    <FormInput name="fullName" label="Full Name" required/>
 
-                    <FormInput type="password" name="password" label="Новый пароль" required/>
-                    <FormInput type="password" name="confirmPassword" label="Повторите пароль" required/>
+                    <FormInput type="password" name="password" label="New Password" required/>
+                    <FormInput type="password" name="confirmPassword" label="Repeat Password" required/>
 
                     <Button disabled={form.formState.isSubmitting} className="text-base mt-10" type="submit">
-                        Сохранить
+                        Save
                     </Button>
 
                     <Button
@@ -75,7 +75,7 @@ export const ProfileForm: React.FC<Props> = ({data}) => {
                         className="text-base"
                         type="button"
                     >
-                        Выйти
+                        Sign Out
                     </Button>
                 </form>
             </FormProvider>

@@ -1,6 +1,6 @@
 import {prisma} from "./prisma-client"
 import {Prisma} from "@prisma/client"
-import {hashSync} from "bcrypt"
+import {hashSync} from "bcryptjs"
 import {categories, ingredients, products} from "./constants"
 
 const randomDecimalNumber = (min: number, max: number) => {
@@ -54,7 +54,7 @@ async function up() {
 
     const pizza1 = await prisma.product.create({
         data: {
-            name: "Пепперони фреш",
+            name: "Pepperoni Fresh",
             imageUrl: "https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp",
             categoryId: 1,
             ingredients: {
@@ -65,7 +65,7 @@ async function up() {
 
     const pizza2 = await prisma.product.create({
         data: {
-            name: "Сырная",
+            name: "Cheese",
             imageUrl: "https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp",
             categoryId: 1,
             ingredients: {
@@ -76,7 +76,7 @@ async function up() {
 
     const pizza3 = await prisma.product.create({
         data: {
-            name: "Чоризо фреш",
+            name: "Chorizo Fresh",
             imageUrl: "https://media.dodostatic.net/image/r:233x233/11EE7D61706D472F9A5D71EB94149304.webp",
             categoryId: 1,
             ingredients: {

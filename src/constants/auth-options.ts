@@ -3,7 +3,7 @@ import GitHubProvider from "next-auth/providers/github"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import {prisma} from "@/prisma/prisma-client"
-import {compare, hashSync} from "bcrypt"
+import {compare, hashSync} from "bcryptjs"
 import {Role} from "@prisma/client"
 
 export const authOptions: AuthOptions = {
@@ -36,33 +36,39 @@ export const authOptions: AuthOptions = {
                     return null
                 }
 
-                const values = {
-                    email: credentials.email
-                }
+                try {
+                    const findUser = await prisma.user.findFirst({
+                        where: {
+                            email: credentials.email
+                        }
+                    })
 
-                const findUser = await prisma.user.findFirst({
-                    where: values
-                })
+                    if (!findUser) {
+                        console.error("[AUTH] User not found:", credentials.email)
+                        return null
+                    }
 
-                if (!findUser) {
+                    const isPasswordValid = await compare(credentials.password, findUser.password)
+
+                    if (!isPasswordValid) {
+                        console.error("[AUTH] Invalid password for:", credentials.email)
+                        return null
+                    }
+
+                    if (!findUser.verified) {
+                        console.error("[AUTH] User not verified:", credentials.email)
+                        return null
+                    }
+
+                    return {
+                        id: findUser.id,
+                        email: findUser.email,
+                        name: findUser.fullName,
+                        role: findUser.role
+                    }
+                } catch (error) {
+                    console.error("[AUTH] Authorize error:", error)
                     return null
-                }
-
-                const isPasswordValid = await compare(credentials.password, findUser.password)
-
-                if (!isPasswordValid) {
-                    return null
-                }
-
-                if (!findUser.verified) {
-                    return null
-                }
-
-                return {
-                    id: findUser.id,
-                    email: findUser.email,
-                    name: findUser.fullName,
-                    role: findUser.role
                 }
             }
         })

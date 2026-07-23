@@ -16,7 +16,7 @@ export const Title: React.FC<Props> = ({text, size = "sm", className}) => {
         md: "h3",
         lg: "h2",
         xl: "h1",
-        "2xl": "h1",
+        "2xl": "h1"
     } as const
 
     const mapClassNameBySize = {
@@ -25,12 +25,12 @@ export const Title: React.FC<Props> = ({text, size = "sm", className}) => {
         md: "text-[26px]",
         lg: "text-[32px]",
         xl: "text-[40px]",
-        "2xl": "text-[48px]",
+        "2xl": "text-[48px]"
     } as const
 
     return React.createElement(
         mapTagBySize[size],
         {className: clsx(mapClassNameBySize[size], className)},
-        text,
+        text
     )
 }

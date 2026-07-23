@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, {ReactNode} from "react"
 import Image from "next/image"
 import {
     Sheet,
@@ -21,7 +21,7 @@ import {Title} from "./title"
 import {cn} from "@/lib/utils"
 import {useCart} from "@/hooks/use-cart"
 
-export const CartDrawer: React.FC<React.PropsWithChildren> = ({children}) => {
+export const CartDrawer = ({children}: { children: ReactNode }) => {
     const {totalAmount, updateItemQuantity, items, removeCartItem} = useCart()
     const [redirecting, setRedirecting] = React.useState(false)
 
@@ -39,23 +39,24 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({children}) => {
                     {totalAmount > 0 && (
                         <SheetHeader>
                             <SheetTitle>
-                                В корзине <span className="font-bold">{items.length} товара</span>
+                                <span className="font-bold">{items.length} items</span> in cart
                             </SheetTitle>
                         </SheetHeader>
                     )}
 
                     {!totalAmount && (
-                        <div className="flex flex-col items-center justify-center w-72 mx-auto">
+                        <div className="flex flex-col items-center justify-center px-4 mx-auto">
                             <Image src="/assets/images/empty-box.png" alt="Empty cart" width={120} height={120}/>
-                            <Title size="sm" text="Корзина пустая" className="text-center font-bold my-2"/>
-                            <p className="text-center text-neutral-500 mb-5">
-                                Добавьте хотя бы одну пиццу, чтобы совершить заказ
+                            <Title size="sm" text="Cart is empty" className="text-center font-bold my-2"/>
+
+                            <p className="text-center text-neutral-500 mb-5 text-sm">
+                                Add at least one pizza to place an order
                             </p>
 
                             <SheetClose>
-                                <Button className="w-56 h-12 text-base" size="lg">
+                                <Button className="w-full sm:w-56 h-12 text-base" size="lg">
                                     <ArrowLeft className="w-5 mr-2"/>
-                                    Вернуться назад
+                                    Go Back
                                 </Button>
                             </SheetClose>
                         </div>
@@ -87,16 +88,17 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({children}) => {
                                 ))}
                             </div>
 
-                            <SheetFooter className="-mx-6 bg-white p-8">
+                            <SheetFooter className="-mx-6 bg-white p-4 sm:p-8">
                                 <div className="w-full">
-                                    <div className="flex mb-4">
-                                        <span className="flex flex-1 text-lg text-neutral-500"> Итого
+                                    <div className="flex mb-4 gap-2">
+                                        <span className="flex flex-1 text-base sm:text-lg text-neutral-500 min-w-0">
+                                          Total
                                           <div
-                                              className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2"
-                                          />
+                                              className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2"/>
                                         </span>
 
-                                        <span className="font-bold text-lg">{totalAmount} ₽</span>
+                                        <span
+                                            className="font-bold text-base sm:text-lg whitespace-nowrap">{totalAmount} ₽</span>
                                     </div>
 
                                     <Link href="/checkout">
@@ -106,7 +108,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({children}) => {
                                             type="submit"
                                             className="w-full h-12 text-base"
                                         >
-                                            Оформить заказ
+                                            Place Order
 
                                             <ArrowRight className="w-5 ml-2"/>
                                         </Button>

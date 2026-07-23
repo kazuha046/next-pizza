@@ -4,16 +4,16 @@ import {prisma} from "@/prisma/prisma-client"
 import {PayOrderTemplate} from "@/components/shared/email-temapltes/pay-order"
 import {VerificationUserTemplate} from "@/components/shared/email-temapltes/verification-user"
 import {CheckoutFormValues} from "@/constants/checkout-form-schema"
-import {createPayment} from "../lib/create-payment"
+import {createPayment} from "@/lib/create-payment"
 import {getUserSession} from "@/lib/get-user-session"
 import {Prisma, Status} from "@prisma/client"
-import {hashSync} from "bcrypt"
+import {hashSync} from "bcryptjs"
 import {cookies} from "next/headers"
 import {sendEmail} from "@/lib/send-email"
 
 export async function createOrder(data: CheckoutFormValues) {
     try {
-        const cookieStore = cookies()
+        const cookieStore = await cookies()
         const cartToken = cookieStore.get("cartToken")?.value
 
         if (!cartToken) {
@@ -79,7 +79,7 @@ export async function createOrder(data: CheckoutFormValues) {
         const paymentData = await createPayment({
             amount: order.totalAmount,
             orderId: order.id,
-            description: "Оплата заказа #" + order.id
+            description: "Order payment #" + order.id
         })
 
         if (!paymentData) {
@@ -99,7 +99,7 @@ export async function createOrder(data: CheckoutFormValues) {
 
         await sendEmail(
             data.email,
-            "Next Pizza / Оплатите заказ #" + order.id,
+            "Next Pizza / Pay for order #" + order.id,
             PayOrderTemplate({
                 orderId: order.id,
                 totalAmount: order.totalAmount,
@@ -110,6 +110,7 @@ export async function createOrder(data: CheckoutFormValues) {
         return paymentUrl
     } catch (err) {
         console.log("[CreateOrder] Server error", err)
+        throw err
     }
 }
 
@@ -118,7 +119,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
         const currentUser = await getUserSession()
 
         if (!currentUser) {
-            throw new Error("Пользователь не найден")
+            throw new Error("User not found")
         }
 
         const findUser = await prisma.user.findFirst({
@@ -153,10 +154,10 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 
         if (user) {
             if (!user.verified) {
-                throw new Error("Почта не подтверждена")
+                throw new Error("Email not verified")
             }
 
-            throw new Error("Пользователь уже существует")
+            throw new Error("User already exists")
         }
 
         const createdUser = await prisma.user.create({
@@ -178,7 +179,7 @@ export async function registerUser(body: Prisma.UserCreateInput) {
 
         await sendEmail(
             createdUser.email,
-            "Next Pizza / 📝 Подтверждение регистрации",
+            "Next Pizza / 📝 Registration verification",
             VerificationUserTemplate({
                 code
             })

@@ -1,23 +1,22 @@
-import React from "react"
+import {ReactNode} from "react"
 import {Title} from "./title"
 import {cn} from "@/lib/utils"
 
 interface Props {
     title?: string
-    endAdornment?: React.ReactNode
+    endAdornment?: ReactNode
     className?: string
     contentClassName?: string
+    children: ReactNode
 }
 
-export const WhiteBlock: React.FC<React.PropsWithChildren<Props>> = (
-    {
-        title,
-        endAdornment,
-        className,
-        contentClassName,
-        children
-    }
-) => {
+export const WhiteBlock = ({
+                               title,
+                               endAdornment,
+                               className,
+                               contentClassName,
+                               children
+                           }: Props) => {
     return (
         <div className={cn("bg-white rounded-3xl", className)}>
             {title && (

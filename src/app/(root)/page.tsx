@@ -7,13 +7,14 @@ import {ProductsGroupList} from "@/components/shared/products-group-list"
 import {findPizzas, GetSearchParams} from "@/lib/find-pizzas"
 import {Stories} from "@/components/shared/stories"
 
-export default async function Home({searchParams}: { searchParams: GetSearchParams }) {
-    const categories = await findPizzas(searchParams)
+export default async function Home({searchParams}: { searchParams: Promise<GetSearchParams> }) {
+    const params = await searchParams
+    const categories = await findPizzas(params)
 
     return (
         <>
             <Container className="mt-10">
-                <Title text="Все пиццы" size="lg" className="font-extrabold"/>
+                <Title text="All Pizzas" size="lg" className="font-extrabold"/>
             </Container>
 
             <TopBar categories={categories.filter((category) => category.products.length > 0)}/>
@@ -21,15 +22,15 @@ export default async function Home({searchParams}: { searchParams: GetSearchPara
             <Stories/>
 
             <Container className="mt-10 pb-14">
-                <div className="flex gap-[80px]">
-                    <div className="w-[250px]">
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-20">
+                    <div className="w-full lg:w-62.5">
                         <Suspense>
                             <Filters/>
                         </Suspense>
                     </div>
 
                     <div className="flex-1">
-                        <div className="flex flex-col gap-16">
+                        <div className="flex flex-col gap-8 lg:gap-16">
                             {
                                 categories.map(
                                     (category) => category.products.length > 0 && (

@@ -13,7 +13,8 @@ interface Props {
 }
 
 export const ProductForm: React.FC<Props> = ({product, onSubmit: _onSubmit}) => {
-    const [addCartItem, loading] = useCartStore((state) => [state.addCartItem, state.loading])
+    const addCartItem = useCartStore((state) => state.addCartItem)
+    const loading = useCartStore((state) => state.loading)
 
     const firstItem = product.items[0]
     const isPizzaForm = Boolean(firstItem.pizzaType)
@@ -27,11 +28,11 @@ export const ProductForm: React.FC<Props> = ({product, onSubmit: _onSubmit}) => 
                 ingredients
             })
 
-            toast.success(product.name + " добавлена в корзину")
+            toast.success(product.name + " added to cart")
 
             _onSubmit?.()
         } catch (err) {
-            toast.error("Не удалось добавить товар в корзину")
+            toast.error("Failed to add item to cart")
             console.error(err)
         }
     }

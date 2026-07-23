@@ -1,22 +1,20 @@
 "use client"
 
 import {cn} from "@/lib/utils"
-import React from "react"
 import {Button} from "../ui/button"
 import {ArrowRight, ShoppingCart} from "lucide-react"
 import {CartDrawer} from "./cart-drawer"
 import {useCartStore} from "@/store/cart"
 
+
 interface Props {
     className?: string;
 }
 
-export const CartButton: React.FC<Props> = ({className}) => {
-    const [totalAmount, items, loading] = useCartStore((state) => [
-        state.totalAmount,
-        state.items,
-        state.loading
-    ])
+export const CartButton = ({className}: Props) => {
+    const totalAmount = useCartStore((state) => state.totalAmount)
+    const items = useCartStore((state) => state.items)
+    const loading = useCartStore((state) => state.loading)
 
     return (
         <CartDrawer>

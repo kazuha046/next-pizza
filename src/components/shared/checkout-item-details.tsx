@@ -7,7 +7,7 @@ interface Props {
     className?: string
 }
 
-export const CheckoutItemDetails: React.FC<Props> = ({title, value, className}) => {
+export const CheckoutItemDetails = ({title, value, className}: Props) => {
     return (
         <div className={cn("flex my-4", className)}>
             <span className="flex flex-1 text-lg text-neutral-500">
