@@ -1,18 +1,16 @@
 {
   "name": "next-pizza",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prisma:push": "prisma db push --schema src/prisma/schema.prisma",
-    "prisma:studio": "prisma studio --schema src/prisma/schema.prisma",
-    "prisma:seed": "prisma db seed --schema src/prisma/schema.prisma"
-  },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} src/prisma/seed.ts"
+    "lint": "eslint",
+    "prisma:push": "prisma db push",
+    "prisma:seed": "prisma db seed",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.6",
@@ -66,5 +64,13 @@
     "tailwindcss": "^4.3.3",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3"
-  }
+  },
+  "ignoreScripts": [
+    "sharp",
+    "unrs-resolver"
+  ],
+  "trustedDependencies": [
+    "sharp",
+    "unrs-resolver"
+  ]
 }

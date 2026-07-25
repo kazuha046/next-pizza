@@ -1,4 +1,4 @@
-import {prisma} from "@/prisma/prisma-client"
+import prisma from "@/lib/prisma"
 
 export interface GetSearchParams {
     query?: string

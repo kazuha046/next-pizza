@@ -1,5 +1,5 @@
 import type {MetadataRoute} from "next"
-import {prisma} from "@/prisma/prisma-client"
+import prisma from "@/lib/prisma"
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
 

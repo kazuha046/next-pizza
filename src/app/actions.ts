@@ -1,15 +1,16 @@
 "use server"
 
-import {prisma} from "@/prisma/prisma-client"
+import prisma from "@/lib/prisma"
 import {PayOrderTemplate} from "@/components/shared/email-temapltes/pay-order"
 import {VerificationUserTemplate} from "@/components/shared/email-temapltes/verification-user"
 import {CheckoutFormValues} from "@/constants/checkout-form-schema"
 import {createPayment} from "@/lib/create-payment"
 import {getUserSession} from "@/lib/get-user-session"
-import {Prisma, Status} from "@prisma/client"
 import {hashSync} from "bcryptjs"
 import {cookies} from "next/headers"
 import {sendEmail} from "@/lib/send-email"
+import {Status} from "@/generated/prisma/client"
+import {UserCreateInput, UserUpdateInput} from "@/generated/prisma/models"
 
 export async function createOrder(data: CheckoutFormValues) {
     try {
@@ -114,7 +115,7 @@ export async function createOrder(data: CheckoutFormValues) {
     }
 }
 
-export async function updateUserInfo(body: Prisma.UserUpdateInput) {
+export async function updateUserInfo(body: UserUpdateInput) {
     try {
         const currentUser = await getUserSession()
 
@@ -144,7 +145,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
     }
 }
 
-export async function registerUser(body: Prisma.UserCreateInput) {
+export async function registerUser(body: UserCreateInput) {
     try {
         const user = await prisma.user.findFirst({
             where: {

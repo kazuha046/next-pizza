@@ -1,5 +1,5 @@
 import {Api} from "@/components/services/api-client"
-import {Ingredient} from "@prisma/client"
+import {Ingredient} from "@/generated/prisma/client"
 import {useEffect, useState} from "react"
 import {useSet} from "react-use"
 

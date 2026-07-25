@@ -1,5 +1,5 @@
 import {ProductForm} from "@/components/shared/product-form"
-import {prisma} from "@/prisma/prisma-client"
+import prisma from "@/lib/prisma"
 import {notFound} from "next/navigation"
 import {Container} from "@/components/shared/container"
 import type {Metadata} from "next"

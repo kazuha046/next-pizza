@@ -21,7 +21,7 @@
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </DataSourceFromHistory>
-  <DataSourceFromHistory isRemovedFromProject="true">
+  <DataSourceFromHistory isRemovedFromProject="false">
     <data-source source="LOCAL" name="neondb@ep-soft-term-asfler1p-pooler.c-4.eu-central-1.aws.neon.tech" uuid="b9996189-049c-4ece-8ae9-e56f14ee2e7b">
       <database-info product="PostgreSQL" version="17.10 (2947584)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="17.10" exact-driver-version="42.7">
         <identifier-quote-string>&quot;</identifier-quote-string>

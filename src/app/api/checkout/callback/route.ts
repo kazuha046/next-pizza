@@ -1,9 +1,9 @@
 import {PaymentCallbackData} from "@/@types/yookassa"
-import {prisma} from "@/prisma/prisma-client"
+import prisma from "@/lib/prisma"
 import {OrderSuccessTemplate} from "@/components/shared/email-temapltes/order-success"
 import {sendEmail} from "@/lib/send-email"
 import {CartItemDTO} from "@/components/services/dto/cart.dto"
-import {Status} from "@prisma/client"
+import {Status} from "@/generated/prisma/client"
 import {NextRequest, NextResponse} from "next/server"
 
 export async function POST(req: NextRequest) {

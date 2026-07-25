@@ -1,4 +1,4 @@
-import {prisma} from "@/prisma/prisma-client"
+import prisma from "@/lib/prisma"
 import {NextRequest, NextResponse} from "next/server"
 import crypto from "crypto"
 import {findOrCreateCart} from "@/lib/find-or-create-cart"

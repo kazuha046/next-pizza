@@ -1,7 +1,17 @@
-import {prisma} from "./prisma-client"
-import {Prisma} from "@prisma/client"
+import {PrismaClient} from "@/generated/prisma/client"
+import {PrismaPg} from "@prisma/adapter-pg"
+import "dotenv/config"
 import {hashSync} from "bcryptjs"
 import {categories, ingredients, products} from "./constants"
+import {ProductItemUncheckedCreateInput} from "@/generated/prisma/models/ProductItem"
+
+const adapter = new PrismaPg({
+    connectionString: process.env.DATABASE_URL
+})
+
+const prisma = new PrismaClient({
+    adapter
+})
 
 const randomDecimalNumber = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10
@@ -17,7 +27,7 @@ const generateProductItem = ({productId, pizzaType, size}: {
         price: randomDecimalNumber(190, 600),
         pizzaType,
         size
-    } as Prisma.ProductItemUncheckedCreateInput
+    } as ProductItemUncheckedCreateInput
 }
 
 async function up() {
@@ -209,19 +219,13 @@ async function down() {
     await prisma.$executeRaw`TRUNCATE TABLE "StoryItem" RESTART IDENTITY CASCADE`
 }
 
-async function main() {
-    try {
-        await down()
-        await up()
-    } catch (e) {
-        console.error(e)
-    }
+export async function main() {
+    await down()
+    await up()
 }
 
-main().then(async () => {
-    await prisma.$disconnect()
-}).catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-})
+void main()
+    .catch(console.error)
+    .finally(async () => {
+        await prisma.$disconnect()
+    })

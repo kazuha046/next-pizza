@@ -3,7 +3,7 @@ import Link from "next/link"
 import {Title} from "./title"
 import {Button} from "../ui/button"
 import {Plus} from "lucide-react"
-import {Ingredient} from "@prisma/client"
+import {Ingredient} from "@/generated/prisma/client"
 import Image from "next/image"
 
 interface Props {

@@ -3,7 +3,7 @@ import {cn} from "@/lib/utils"
 import {Categories} from "./categories"
 import {SortPopup} from "./sort-popup"
 import {Container} from "./container"
-import {Category} from "@prisma/client"
+import {Category} from "@/generated/prisma/client"
 
 interface Props {
     categories: Category[]

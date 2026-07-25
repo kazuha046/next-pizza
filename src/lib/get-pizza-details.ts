@@ -1,5 +1,5 @@
 import {calcTotalPizzaPrice} from "./calc-total-pizza-price"
-import {Ingredient, ProductItem} from "@prisma/client"
+import {Ingredient, ProductItem} from "@/generated/prisma/client"
 import {mapPizzaType, PizzaSize, PizzaType} from "@/constants/pizza"
 
 export const getPizzaDetails = (
