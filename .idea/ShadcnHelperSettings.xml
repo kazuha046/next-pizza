@@ -2970,6 +2970,54 @@
         <option name="homepage" value="https://shadcn-loaders.vercel.app" />
         <option name="urlTemplate" value="https://shadcn-loaders.vercel.app/r/{name}.json" />
       </RegistryConfigState>
+      <RegistryConfigState>
+        <option name="id" value="central-amicro" />
+        <option name="name" value="Amicro" />
+        <option name="namespace" value="@amicro" />
+        <option name="baseUrl" value="https://amicro.vercel.app/r" />
+        <option name="stylePath" value="/{name}.json" />
+        <option name="type" value="community" />
+        <option name="enabled" value="false" />
+        <option name="description" value="Open-source React micro-interactions and UI component registry powered by Motion." />
+        <option name="homepage" value="https://amicro.vercel.app" />
+        <option name="urlTemplate" value="https://amicro.vercel.app/r/{name}.json" />
+      </RegistryConfigState>
+      <RegistryConfigState>
+        <option name="id" value="central-hugeicons-animated" />
+        <option name="name" value="Hugeicons-animated" />
+        <option name="namespace" value="@hugeicons-animated" />
+        <option name="baseUrl" value="https://hugeicons-animated.com/r" />
+        <option name="stylePath" value="/{name}.json" />
+        <option name="type" value="community" />
+        <option name="enabled" value="false" />
+        <option name="description" value="An open-source collection of animated Hugeicons for React." />
+        <option name="homepage" value="https://hugeicons-animated.com" />
+        <option name="urlTemplate" value="https://hugeicons-animated.com/r/{name}.json" />
+      </RegistryConfigState>
+      <RegistryConfigState>
+        <option name="id" value="central-motokoui" />
+        <option name="name" value="Motokoui" />
+        <option name="namespace" value="@motokoui" />
+        <option name="baseUrl" value="https://www.motokoui.com/r" />
+        <option name="stylePath" value="/{name}.json" />
+        <option name="type" value="community" />
+        <option name="enabled" value="false" />
+        <option name="description" value="Components, application blocks, templates, and starter kits for modern React applications." />
+        <option name="homepage" value="https://motokoui.com" />
+        <option name="urlTemplate" value="https://www.motokoui.com/r/{name}.json" />
+      </RegistryConfigState>
+      <RegistryConfigState>
+        <option name="id" value="central-navui" />
+        <option name="name" value="Navui" />
+        <option name="namespace" value="@navui" />
+        <option name="baseUrl" value="https://ui.navdeepsingh.dev/r" />
+        <option name="stylePath" value="/{name}.json" />
+        <option name="type" value="community" />
+        <option name="enabled" value="false" />
+        <option name="description" value="shadcn-compatible components, blocks, and illustrations that adapt to your existing design configuration." />
+        <option name="homepage" value="https://ui.navdeepsingh.dev" />
+        <option name="urlTemplate" value="https://ui.navdeepsingh.dev/r/{name}.json" />
+      </RegistryConfigState>
     </registryConfigs>
   </component>
 </project>

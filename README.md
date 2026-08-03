@@ -59,7 +59,7 @@ Next Pizza is a production-ready pizza delivery web application featuring real-t
 ### Installation
 
 ```bash
-git clone https://github.com/mrkirill046/next-pizza.git
+git clone https://github.com/kazuha046/next-pizza.git
 cd next-pizza
 bun install
 ```
